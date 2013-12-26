@@ -15,6 +15,8 @@ var replyId = 0;
 var replyDepth = 0;
 var currTopic = 0;
 var totalTopics = 0;
+
+var loggedInUser = "LoggedInUser";
 /**
  * Creates a response element
  * @param response
@@ -27,10 +29,6 @@ function getResponse(response, topicId){
         class: "response-container"
     })
         .append(jQuery("<div></div>",{
-            class: "vertical-line",
-            html:"&nbsp;"
-        }))
-        .append(jQuery("<div></div>",{
             class:"spacer"
         }))
         .append(jQuery("<p></p>",{
@@ -41,8 +39,7 @@ function getResponse(response, topicId){
             class:"response-content",
             html: response.posttext
         }))
-        //a loaded button id is used to track data for each response that will come in handy to place the replies in the
-        // right place
+        //a loaded button id comes in handy to place the replies in the right place
         .append(jQuery("<button></button>",{
             id: "reply_"+topicId+"_"+response.parentid+"_"+response.depth+"_"+response.id,
             class:"btn response",
@@ -182,7 +179,7 @@ $(function(){
                 depth:replyDepth,
                 //ignoring age for now
                 age:99999,
-                author:"LoggedInUser",
+                author: loggedInUser,
                 posttext:$('#resp-text').val()
             };
             //Push response into the correct topic
