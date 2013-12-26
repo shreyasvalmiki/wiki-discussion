@@ -3,6 +3,8 @@
  *
  * Creates a threaded discussion platform
  *
+ * Resources: http://unicorn.wmflabs.org/techtask/discussion.json
+ *
  */
 var data;
 //dictionary to save all responses
@@ -14,7 +16,8 @@ var replyTopicId = 0;
 var replyParentId = 0;
 var replyId = 0;
 var replyDepth = 0;
-
+var currTopic = 0;
+var totalTopics = 0;
 /**
  * Creates a response element
  * @param response
@@ -120,8 +123,42 @@ function render(){
     });
 }
 
+function renderOne(){
+    var id = 0;
+    $('.topics').remove();
+    buildTopic(data.topics[currTopic],currTopic);
+}
+
 $(function(){
-    $('#resp').hide();
+    $("#resp").hide();
+    $("#previous").hide();
+    $("body").on("click","#next",function(event){
+        if(currTopic+1 < totalTopics-1){
+            ++currTopic;
+            renderOne();
+            $("#previous").show();
+        }
+        else if(currTopic+1 == totalTopics-1){
+            ++currTopic;
+            renderOne();
+            $("#previous").show();
+            $("#next").hide();
+        }
+
+    })
+    $("body").on("click","#previous",function(event){
+        if(currTopic-1 > 0){
+            --currTopic;
+            renderOne();
+            $("#next").show();
+        }
+        else if(currTopic-1 == 0){
+            $("#previous").hide();
+            --currTopic;
+            renderOne();
+            $("#next").show();
+        }
+    })
     /**
      * On click of the response buttons (Reply/Response), parses the id to store the different parts to the
      * global variables to use while saving the response
@@ -132,7 +169,6 @@ $(function(){
         replyParentId = ids[2];
         replyDepth = ids[3];
         replyId = ids[4];
-        //$("body").scrollTop(0);
         $('#resp').show();
     });
     /**
@@ -161,7 +197,7 @@ $(function(){
             $('#resp').hide();
             $('#resp-text').val("");
             //Refresh
-            render();
+            renderOne();
         }
     })
     /**
@@ -177,7 +213,9 @@ $(function(){
         url: "data.json",
         success:function(res){
             data = res;
-            render();
+            totalTopics = data.topics.length;
+            currTopic = 0;
+            renderOne();
 
         },
         error: function (xhr, ajaxOptions, thrownError) {

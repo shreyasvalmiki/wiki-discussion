@@ -42,3 +42,7 @@
 .spacer{
     padding-top: 20px;
 }
+
+#previous #next{
+    float: right;
+}
