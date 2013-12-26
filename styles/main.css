@@ -1,20 +1,26 @@
 .vertical-line {
-    border-left: thick solid #ff0000;
+
     float: left;
 }
 
 #resp{
     position:fixed;
-    top: 40%;
-    left: 35%;
-    width:400px;
-    height:150px;
+    top: 0px;
+    left: 0px;
+    width:100%;
+    height:100%;
     border: 1px solid #ccc;
-    background-color: #fdfdfd;
+    background-color: rgba(255,255,255,0.8);
     padding: 20px;
 }
+#resp > div{
+    top: 30%;
+    left: 30%;
+    position: fixed;
+    opacity: 1;
+}
 .response-container{
-    padding-left: 30px;
+    padding-left: 3%;
     border-left: 1px solid #ccc;
 }
 .topic{
@@ -28,4 +34,11 @@
 
 .topic-container{
     padding-bottom: 100px;
+}
+.author{
+    font-weight: bolder;
+    border-left: thick solid #ff0000;
+}
+.spacer{
+    padding-top: 20px;
 }

@@ -30,7 +30,10 @@ function getResponse(response, topicId){
             class: "vertical-line",
             html:"&nbsp;"
         }))
-        .append(jQuery("<h4></h4>",{
+        .append(jQuery("<div></div>",{
+            class:"spacer"
+        }))
+        .append(jQuery("<p></p>",{
             class:"author",
             text: "Author: "+response.author
         }))
