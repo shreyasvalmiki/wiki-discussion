@@ -1,10 +1,7 @@
 /**
  * Created by svalmiki on 12/25/13.
- *
- * Creates a threaded discussion platform
- *
+ * Summary: Creates a threaded discussion platform
  * Resources: http://unicorn.wmflabs.org/techtask/discussion.json
- *
  */
 var data;
 //dictionary to save all responses
@@ -122,7 +119,9 @@ function render(){
         ++id;
     });
 }
-
+/**
+ * Renders one topic -- the current topic
+ */
 function renderOne(){
     var id = 0;
     $('.topics').remove();
@@ -132,31 +131,28 @@ function renderOne(){
 $(function(){
     $("#resp").hide();
     $("#previous").hide();
+    /**
+     * On click of the next button, go to the next topic
+     */
     $("body").on("click","#next",function(event){
-        if(currTopic+1 < totalTopics-1){
+        if(currTopic+1 < totalTopics){
             ++currTopic;
             renderOne();
             $("#previous").show();
+            if(currTopic == totalTopics-1)
+                $("#next").hide();
         }
-        else if(currTopic+1 == totalTopics-1){
-            ++currTopic;
-            renderOne();
-            $("#previous").show();
-            $("#next").hide();
-        }
-
     })
+    /**
+     * On click of the previous button, go to the previous topic
+     */
     $("body").on("click","#previous",function(event){
-        if(currTopic-1 > 0){
+        if(currTopic-1 >= 0){
             --currTopic;
             renderOne();
             $("#next").show();
-        }
-        else if(currTopic-1 == 0){
-            $("#previous").hide();
-            --currTopic;
-            renderOne();
-            $("#next").show();
+            if(currTopic == 0)
+                $("#previous").hide();
         }
     })
     /**
@@ -216,7 +212,6 @@ $(function(){
             totalTopics = data.topics.length;
             currTopic = 0;
             renderOne();
-
         },
         error: function (xhr, ajaxOptions, thrownError) {
             alert(xhr.status);
