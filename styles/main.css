@@ -1,0 +1,31 @@
+.vertical-line {
+    border-left: thick solid #ff0000;
+    float: left;
+}
+
+#resp{
+    position:fixed;
+    top: 40%;
+    left: 35%;
+    width:400px;
+    height:150px;
+    border: 1px solid #ccc;
+    background-color: #fdfdfd;
+    padding: 20px;
+}
+.response-container{
+    padding-left: 30px;
+    border-left: 1px solid #ccc;
+}
+.topic{
+    text-decoration: underline;
+    padding-bottom: 40px;
+}
+.header{
+    padding-bottom: 50px;
+    text-align: center;
+}
+
+.topic-container{
+    padding-bottom: 100px;
+}
